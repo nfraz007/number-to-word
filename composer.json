@@ -1,0 +1,17 @@
+{
+    "name": "nfraz007/number-to-words",
+    "description": "Library to convert number to words",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nazish Fraz",
+            "email": "nfraz007@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0" : {
+            "" : "src/"
+        }
+    }
+}
