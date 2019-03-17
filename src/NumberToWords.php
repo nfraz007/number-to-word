@@ -75,9 +75,9 @@ class NumberTowords{
 	public static function convert($number = "", $config = []){
 		$decimal = ""; $numerical = ""; $output=""; $negative = "";
 		
-		if(!is_numeric($number)) throw new Exception("Not a valid number.", 1);
+		if(!is_numeric($number)) return "not a valid number.";
 		$len=strlen($number);
-		if($len>99) throw new Exception("Too big number, maximum string length is 99", 1);
+		if($len>99) return "too big number, maximum string length is 99";
 
 		// apply config
 
