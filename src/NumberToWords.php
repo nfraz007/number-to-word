@@ -1,6 +1,8 @@
 <?php
 
 class NumberTowords{
+	private static $point = 'point';
+	private static $minus = 'negative';
 	private static $space = ' ';
 	private static $dash  = '-';
 	private static $unit  = array(
@@ -70,16 +72,40 @@ class NumberTowords{
 		100 => 'hundred'
 	);
 	
-	public static function convert($number){
-	    $output="";
-		if(!is_numeric($number)) throw new Exception("Not a valid number.", 1);
+	public static function convert($number = "", $config = []){
+		$decimal = ""; $numerical = ""; $output=""; $negative = "";
 		
-		$number=str_replace('+', '', $number);
-		$number=str_replace('-', '', $number);
-		$number=str_replace('.', '', $number);
+		if(!is_numeric($number)) throw new Exception("Not a valid number.", 1);
 		$len=strlen($number);
 		if($len>99) throw new Exception("Too big number, maximum string length is 99", 1);
+
+		// apply config
+
+		// check is there any + sign, then replace with blank
+		if(strpos($number, "+") !== false){
+			$number = str_replace('+', '', $number);
+		}
+
+		// check is there any minus sign
+		if(strpos($number, "-") !== false){
+			$number = str_replace('-', '', $number);
+			$negative = static::$minus.static::$space;
+		}
 		
+		$point_pos = strpos($number, ".");
+		if($point_pos !== false){
+			// we got point, then split and convert
+			$numerical = static::convert_number(substr($number, 0, $point_pos), $point_pos, $config);
+			$decimal = static::convert_number(substr($number, $point_pos+1, $len), $len - $point_pos - 1, $config);
+		}else{
+			$numerical = static::convert_number($number, $len, $config);
+		}
+		$output = ($decimal) ? implode(static::$space, [$numerical, static::$point, $decimal]) : $numerical;
+		$output = ($negative) ? implode(static::$space, [$negative, $output]) : $output;
+		return $output;
+	}
+
+	private static function convert_number($number = "", $len = 0, $config = []){
 		for($i=$len;$i>0;$i-=3){
 			$pos=3*((int)($len/3)-(int)($i/3));
 			$start=$i-3;
@@ -88,12 +114,16 @@ class NumberTowords{
 				$stop=3+$start;
 				$start=0;
 			}
-			$temp=static::loop(substr($number,$start,$stop)).static::$space;
-			if($i!=$len) $temp.=static::$unit[$pos].static::$space;
-			$output=$temp.$output;
+			$sub_number = substr($number,$start,$stop);
+			$temp=static::loop($sub_number).static::$space;
+			if((int)$sub_number){
+				if($i!=$len) $temp.=static::$unit[$pos].static::$space;
+				$output=$temp.$output;
+			}
 		}
 		return $output;
 	}
+
 	private static function loop($number){
 		$number=(int)$number;
 	    $output="";
