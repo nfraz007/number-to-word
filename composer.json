@@ -1,6 +1,6 @@
 {
-    "name": "nfraz007/number-to-words",
-    "description": "Library to convert number to words",
+    "name": "nfraz007/number-to-word",
+    "description": "Library to convert number to word",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-0" : {
-            "NumberToWords\\NumberToWords" : "src"
+            "NumberToWords\\NumberToWord" : "src"
         }
     }
 }
