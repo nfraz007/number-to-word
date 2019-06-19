@@ -3,6 +3,18 @@ A php file to convert any number to word form.
 
 # Setup
 
+* Using Composer
+For includeing this library using composer, it is very easy. there are basically two ways. 
+
+First:
+Run this command in terminal inside your project
+> composer require nfraz007/number-to-word
+
+Second: 
+include this line in your composer.json file, inside require object
+> "nfraz007/number-to-word" : "^2.*"
+
+
 * Using Direct File Include
 
 Setup is very easy, just import the file into your project and you are all set.
