@@ -1,6 +1,6 @@
 <?php
 
-class NumberTowords{
+class NumberToWord{
 	private static $point = 'point';
 	private static $minus = 'negative';
 	private static $space = ' ';
