@@ -8,11 +8,11 @@ For includeing this library using composer, it is very easy. there are basically
 
 First:
 Run this command in terminal inside your project
-> composer require nfraz007/number-to-word
+> composer require nfraz007/number-to-word:2.0.0
 
 Second: 
 include this line in your composer.json file, inside require object
-> "nfraz007/number-to-word" : "^2.*"
+> "nfraz007/number-to-word" : "2.0.0"
 
 
 * Using Direct File Include
